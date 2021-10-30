@@ -7,3 +7,5 @@ linter:
   # and their documentation is published at
   # https://dart-lang.github.io/linter/lints/index.html.
   rules:
+    constant_identifier_names: false
+    unnecessary_overrides: false # This one mostly comes from json_serializable package generated files, which is quite annoying

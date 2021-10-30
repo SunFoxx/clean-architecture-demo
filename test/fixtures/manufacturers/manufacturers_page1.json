@@ -1,0 +1,66 @@
+{
+  "Count": 4,
+  "Message": "Response returned successfully",
+  "SearchCriteria": null,
+  "Results": [
+    {
+      "Country": "UNITED STATES (USA)",
+      "Mfr_CommonName": "Tesla",
+      "Mfr_ID": 955,
+      "Mfr_Name": "TESLA, INC.",
+      "VehicleTypes": [
+        {
+          "IsPrimary": true,
+          "Name": "Passenger Car"
+        },
+        {
+          "IsPrimary": false,
+          "Name": "Multipurpose Passenger Vehicle (MPV)"
+        }
+      ]
+    },
+    {
+      "Country": "UNITED KINGDOM (UK)",
+      "Mfr_CommonName": "Aston Martin",
+      "Mfr_ID": 956,
+      "Mfr_Name": "ASTON MARTIN LAGONDA LIMITED",
+      "VehicleTypes": [
+        {
+          "IsPrimary": false,
+          "Name": "Passenger Car"
+        },
+        {
+          "IsPrimary": false,
+          "Name": "Multipurpose Passenger Vehicle (MPV)"
+        }
+      ]
+    },
+    {
+      "Country": "UNITED STATES (USA)",
+      "Mfr_CommonName": "BMW",
+      "Mfr_ID": 957,
+      "Mfr_Name": "BMW OF NORTH AMERICA, LLC",
+      "VehicleTypes": []
+    },
+    {
+      "Country": "UNITED STATES (USA)",
+      "Mfr_CommonName": null,
+      "Mfr_ID": 958,
+      "Mfr_Name": "JAGUAR LAND ROVER NA, LLC",
+      "VehicleTypes": [
+        {
+          "IsPrimary": true,
+          "Name": "Passenger Car"
+        },
+        {
+          "IsPrimary": false,
+          "Name": "Truck "
+        },
+        {
+          "IsPrimary": false,
+          "Name": "Multipurpose Passenger Vehicle (MPV)"
+        }
+      ]
+    }
+  ]
+}

@@ -31,6 +31,10 @@
 .pub/
 /build/
 
+# Generated files
+*.g.*
+*.mocks.*
+
 # Web related
 lib/generated_plugin_registrant.dart
 

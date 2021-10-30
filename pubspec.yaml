@@ -5,15 +5,42 @@ version: 1.0.0+1
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=2.5.1 <2.6.0"
 
 dependencies:
   flutter:
     sdk: flutter
+  # State management
+  flutter_bloc: ^7.0.1
+  # Service locator
+  get_it: ^7.2.0
+  # HTTP client
+  dio: ^4.0.0
+  # Managing current connectivity status
+  internet_connection_checker: ^0.0.1+3
+  # Value equality
+  equatable: ^2.0.3
+  # Required for json_serializable annotations
+  json_annotation: ^4.1.0
+  # Local storage persistence
+  hive: ^2.0.4
+  hive_flutter: ^1.1.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  # Default lints
   flutter_lints: ^1.0.0
+  # For testing.
+  mockito: ^5.0.16
+  # Code generator
+  build_runner: ^2.1.2
+  # Code generator from models (to json and from json)
+  json_serializable: ^5.0.2
+  # Bloc testing
+  bloc_test: ^8.3.0
+  # Helps to persist models to Hive
+  hive_generator: ^1.1.1
 
 flutter:
   uses-material-design: true
