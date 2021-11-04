@@ -1,5 +1,5 @@
 import 'package:hive/hive.dart';
-import 'package:jimmy_test/core/errors/cache_errors.dart';
+import 'package:jimmy_test/core/errors/errors.dart';
 import 'package:jimmy_test/features/manufacturers/data/models/manufacturer_model.dart';
 
 abstract class ManufacturersLocalDataSource {
@@ -20,7 +20,7 @@ class ManufacturersHiveLocalDataSource implements ManufacturersLocalDataSource {
   late Box _box;
 
   ManufacturersHiveLocalDataSource({Box? box}) {
-    _initBox(box);
+    _box = box ?? Hive.box(PAGED_MANUFACTURERS_HIVE_BOX_KEY);
   }
 
   @override
@@ -30,7 +30,13 @@ class ManufacturersHiveLocalDataSource implements ManufacturersLocalDataSource {
     }
 
     if (_box.isNotEmpty && _box.containsKey(page)) {
-      return Future.value(_box.get(page));
+      final boxValue = _box.get(page);
+
+      if (boxValue is! List) {
+        throw CacheDataCorrupted(_box.name, page.toString());
+      }
+
+      return Future.value(boxValue.cast<ManufacturerModel>());
     }
 
     throw CacheDataNotFound(_box.name, page.toString());
@@ -44,9 +50,5 @@ class ManufacturersHiveLocalDataSource implements ManufacturersLocalDataSource {
 
     _box.put(page, data);
     return Future.value(true);
-  }
-
-  void _initBox([Box? box]) async {
-    _box = box ?? await Hive.openBox(PAGED_MANUFACTURERS_HIVE_BOX_KEY);
   }
 }

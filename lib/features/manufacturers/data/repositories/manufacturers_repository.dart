@@ -1,5 +1,4 @@
 import 'package:jimmy_test/core/entities/result.dart';
-import 'package:jimmy_test/core/errors/cache_errors.dart';
 import 'package:jimmy_test/core/errors/errors.dart';
 import 'package:jimmy_test/core/network/network_info.dart';
 import 'package:jimmy_test/features/manufacturers/data/datasources/manufacturers_local_data_source.dart';
@@ -34,6 +33,8 @@ class ManufacturersRepositoryImpl implements ManufacturersRepository {
         models = await _remoteDataSource.fetchManufacturersList(page);
         await _localDataSource.preserveManufacturersList(page, models);
       } on ServerError catch (e) {
+        return Error(e);
+      } on BadConnectionError catch (e) {
         return Error(e);
       }
     } else {

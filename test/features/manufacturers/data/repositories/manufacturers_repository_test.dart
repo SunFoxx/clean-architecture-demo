@@ -1,5 +1,5 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:jimmy_test/core/errors/cache_errors.dart';
 import 'package:jimmy_test/core/errors/errors.dart';
 import 'package:jimmy_test/core/network/network_info.dart';
 import 'package:jimmy_test/features/manufacturers/data/datasources/manufacturers_local_data_source.dart';
@@ -109,7 +109,7 @@ main() {
           () async {
         // arrange
         when(remoteDataSource.fetchManufacturersList(any))
-            .thenAnswer((_) async => throw ServerError());
+            .thenAnswer((_) async => throw ServerError(RequestOptions(path: '')));
 
         // act
         final result = await manufacturersRepository.fetchManufacturers(tPage);

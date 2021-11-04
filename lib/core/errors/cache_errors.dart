@@ -1,3 +1,5 @@
+part of 'errors.dart';
+
 class CacheError implements Exception {}
 
 class CacheStorageUnavailable extends CacheError {
@@ -7,7 +9,7 @@ class CacheStorageUnavailable extends CacheError {
 
   @override
   String toString() {
-    return 'Cache storage $storageName can\'t be accessed. It might not have been initialized properly';
+    return 'Cache storage can\'t be accessed. It might not have been initialized properly';
   }
 }
 
@@ -19,7 +21,7 @@ class CacheDataCorrupted extends CacheError {
 
   @override
   String toString() {
-    return 'The accessed data $corruptedKey in the storage $storageName might be broken or wrongly formatted';
+    return 'The accessed data from the local storage might be broken or wrongly formatted';
   }
 }
 
@@ -31,6 +33,6 @@ class CacheDataNotFound extends CacheError {
 
   @override
   String toString() {
-    return 'You\'ve tried to access "$missingKey" of the "$storageName" storage that does not exists';
+    return 'You\'ve tried to access storage value that does not exists';
   }
 }

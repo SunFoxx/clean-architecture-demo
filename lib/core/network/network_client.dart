@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:jimmy_test/core/network/interceptors.dart';
 
 class VehiclesApiClient {
   static const _BASE_URL = 'https://vpic.nhtsa.dot.gov/api';
@@ -16,6 +17,6 @@ class VehiclesApiClient {
 
   void configureVehiclesApiClient() {
     _dioClient.options = _options;
-    _dioClient.interceptors.addAll([]);
+    _dioClient.interceptors.addAll([BadNetworkErrorInterceptor()]);
   }
 }

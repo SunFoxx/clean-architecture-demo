@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:jimmy_test/core/errors/errors.dart';
 import 'package:jimmy_test/core/network/vehicles_api_routes.dart';
@@ -27,10 +25,10 @@ class ManufacturersApiRemoteDataSource implements ManufacturersRemoteDataSource 
     );
 
     if (response.statusCode != 200) {
-      throw ServerError();
+      throw ServerError(response.requestOptions);
     }
 
-    final responseModel = ManufacturerResponseModel.fromJson(jsonDecode(response.data));
+    final responseModel = ManufacturerResponseModel.fromJson(response.data);
     return responseModel.results;
   }
 }

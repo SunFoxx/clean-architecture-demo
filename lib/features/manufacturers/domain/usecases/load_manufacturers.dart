@@ -21,5 +21,5 @@ class LoadManufacturers
 class LoadManufacturersParams {
   final int page;
 
-  LoadManufacturersParams(this.page);
+  LoadManufacturersParams(this.page) : assert(page > 0);
 }

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:jimmy_test/core/errors/errors.dart';
@@ -53,7 +55,7 @@ main() {
       )).thenAnswer((_) async => Response(
             requestOptions: RequestOptions(path: ''),
             statusCode: 200,
-            data: readFixture(Fixture.manufacturersPage1),
+            data: jsonDecode(readFixture(Fixture.manufacturersPage1)),
           ));
 
       // act

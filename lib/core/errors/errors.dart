@@ -1,13 +1,15 @@
-class NoConnectionError implements Exception {}
+import 'package:dio/dio.dart';
 
-class ServerError implements Exception {
-  final String? message;
-
-  ServerError([this.message]);
-}
+part 'cache_errors.dart';
+part 'network_errors.dart';
 
 class UnexpectedError implements Exception {
   final String? message;
 
-  UnexpectedError([this.message]);
+  const UnexpectedError([this.message]);
+
+  @override
+  String toString() {
+    return 'UnexpectedError: $message';
+  }
 }

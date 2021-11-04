@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive/hive.dart';
-import 'package:jimmy_test/core/errors/cache_errors.dart';
+import 'package:jimmy_test/core/errors/errors.dart';
 import 'package:jimmy_test/features/manufacturers/data/datasources/manufacturers_local_data_source.dart';
 import 'package:jimmy_test/features/manufacturers/data/models/manufacturer_model.dart';
 import 'package:mockito/annotations.dart';
