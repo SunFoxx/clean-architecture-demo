@@ -45,11 +45,7 @@ class _ScrollControlButtonsState extends State<ScrollControlButtons> {
             color: AppTheme.colors.activeButtonTextColor,
           ),
           onPressed: () {
-            widget.scrollController.animateTo(
-              0,
-              duration: const Duration(seconds: 2),
-              curve: Curves.easeOutExpo,
-            );
+            widget.scrollController.jumpTo(0);
           },
           disappearOffset: widget.hideOffset,
         ),

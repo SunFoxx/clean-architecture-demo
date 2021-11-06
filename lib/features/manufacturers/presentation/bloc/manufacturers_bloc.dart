@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:jimmy_test/core/entities/result.dart';
+import 'package:jimmy_test/core/errors/usecases/map_error_to_message.dart';
 import 'package:jimmy_test/features/manufacturers/domain/entities/manufacturer.dart';
 import 'package:jimmy_test/features/manufacturers/domain/usecases/load_manufacturers.dart';
 
@@ -10,11 +11,15 @@ part 'manufacturers_state.dart';
 
 class ManufacturersBloc extends Bloc<ManufacturersEvent, ManufacturersState> {
   final LoadManufacturers _loadManufacturers;
+  final MapErrorToMessage _mapErrorToMessage;
 
   int _lastPage = 0;
 
-  ManufacturersBloc({required LoadManufacturers loadManufacturers})
-      : _loadManufacturers = loadManufacturers,
+  ManufacturersBloc({
+    required LoadManufacturers loadManufacturers,
+    required MapErrorToMessage mapErrorToMessage,
+  })  : _loadManufacturers = loadManufacturers,
+        _mapErrorToMessage = mapErrorToMessage,
         super(ManufacturersState.initial()) {
     on<InitManufacturersPage>(_onInitManufacturersPage);
     on<LoadNextPageEvent>(_onLoadNextPage);
@@ -52,9 +57,10 @@ class ManufacturersBloc extends Bloc<ManufacturersEvent, ManufacturersState> {
         errorState: NoError(),
       ));
     } on Error catch (error) {
+      final message = await _mapErrorToMessage(ErrorMessageMapperParameters(error: error.error));
       return emit(state.copyWith(
         isLoading: false,
-        errorState: LoadingError(error.error.toString()),
+        errorState: LoadingError(message),
       ));
     }
   }

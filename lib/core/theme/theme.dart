@@ -24,14 +24,11 @@ class AppTheme extends ChangeNotifier {
   late AppTextStyles _typography;
 
   static ColorPalette get palette => _instance._palette;
-
   static AppTextStyles get typography => _instance._typography;
-
   static AppColors get colors => AppColors(palette: palette);
 
-  static TextStyle get baseFont => GoogleFonts.poppins();
-
-  static TextStyle get decorationFont => GoogleFonts.cinzelDecorative();
+  static TextStyle baseFont = GoogleFonts.poppins();
+  static TextStyle decorationFont = GoogleFonts.cinzelDecorative();
 
   void changePalette(Palette palette) {
     switch (palette) {

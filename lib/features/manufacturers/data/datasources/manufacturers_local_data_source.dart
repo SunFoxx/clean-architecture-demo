@@ -1,5 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:jimmy_test/core/errors/errors.dart';
+import 'package:jimmy_test/core/utils/hive.dart';
 import 'package:jimmy_test/features/manufacturers/data/models/manufacturer_model.dart';
 
 abstract class ManufacturersLocalDataSource {
@@ -25,21 +26,8 @@ class ManufacturersHiveLocalDataSource implements ManufacturersLocalDataSource {
 
   @override
   Future<List<ManufacturerModel>> fetchManufacturersList(int page) {
-    if (!_box.isOpen) {
-      throw CacheStorageUnavailable(_box.name);
-    }
-
-    if (_box.isNotEmpty && _box.containsKey(page)) {
-      final boxValue = _box.get(page);
-
-      if (boxValue is! List) {
-        throw CacheDataCorrupted(_box.name, page.toString());
-      }
-
-      return Future.value(boxValue.cast<ManufacturerModel>());
-    }
-
-    throw CacheDataNotFound(_box.name, page.toString());
+    final list = HiveUtils.readListOf<ManufacturerModel>(_box, page);
+    return Future.value(list);
   }
 
   @override

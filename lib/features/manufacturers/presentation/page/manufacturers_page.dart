@@ -77,7 +77,7 @@ class _ManufacturersPageState extends State<ManufacturersPage> {
 
   Widget _buildList(ManufacturersState state) {
     final errorMessage =
-        (state.errorState is LoadingError) ? (state as LoadingError).message : null;
+        (state.errorState is LoadingError) ? (state.errorState as LoadingError).message : null;
 
     return Stack(
       fit: StackFit.expand,
@@ -86,6 +86,8 @@ class _ManufacturersPageState extends State<ManufacturersPage> {
         ListView.builder(
           controller: _scrollController,
           itemCount: state.loadedManufacturers.length,
+          cacheExtent:
+              _scrollController.hasClients ? _scrollController.position.viewportDimension : null,
           itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 10),

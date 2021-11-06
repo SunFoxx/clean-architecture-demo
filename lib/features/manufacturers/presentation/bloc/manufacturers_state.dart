@@ -11,15 +11,15 @@ class ManufacturersState extends Equatable {
   final bool isLoading;
   final ManufacturersErrorState errorState;
 
-  @override
-  List<Object?> get props => [loadedManufacturers, canLoadMore, isLoading, errorState];
-
   const ManufacturersState({
     required this.loadedManufacturers,
     required this.canLoadMore,
     required this.isLoading,
     required this.errorState,
   });
+
+  @override
+  List<Object?> get props => [loadedManufacturers, canLoadMore, isLoading, errorState];
 
   factory ManufacturersState.initial() => ManufacturersState(
         loadedManufacturers: const [],

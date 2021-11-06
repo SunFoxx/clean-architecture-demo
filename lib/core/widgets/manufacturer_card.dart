@@ -17,7 +17,7 @@ class ManufacturerCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppTheme.colors.backgroundMain,
         boxShadow: [BoxShadow(blurRadius: 2, spreadRadius: 2, color: AppTheme.colors.shadowColor)],
         borderRadius: const BorderRadius.all(Radius.circular(10)),
       ),
@@ -35,8 +35,10 @@ class ManufacturerCard extends StatelessWidget {
                 border: Border.all(),
                 color: ColorsUtils.generateRandomFromStringSeed(manufacturer.name, 0.2),
               ),
-              child: Text(manufacturer.name[0].toUpperCase(),
-                  style: AppTheme.typography.mediumLargeDecorative),
+              child: Text(
+                manufacturer.name[0].toUpperCase(),
+                style: AppTheme.typography.mediumLargeDecorative,
+              ),
             ),
           ),
           const SizedBox(width: 20),

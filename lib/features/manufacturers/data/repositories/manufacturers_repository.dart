@@ -25,28 +25,32 @@ class ManufacturersRepositoryImpl implements ManufacturersRepository {
 
   @override
   Future<Result<List<Manufacturer>, Exception>> fetchManufacturers(int page) async {
-    final isConnected = await _networkInfo.isConnected;
-    List<ManufacturerModel> models;
+    try {
+      final isConnected = await _networkInfo.isConnected;
+      List<ManufacturerModel> models;
 
-    if (isConnected) {
-      try {
-        models = await _remoteDataSource.fetchManufacturersList(page);
-        await _localDataSource.preserveManufacturersList(page, models);
-      } on ServerError catch (e) {
-        return Error(e);
-      } on BadConnectionError catch (e) {
-        return Error(e);
+      if (isConnected) {
+        try {
+          models = await _remoteDataSource.fetchManufacturersList(page);
+          await _localDataSource.preserveManufacturersList(page, models);
+        } on ServerError catch (e) {
+          return Error(e);
+        } on BadConnectionError catch (e) {
+          return Error(e);
+        }
+      } else {
+        try {
+          models = await _localDataSource.fetchManufacturersList(page);
+        } on CacheError catch (e) {
+          return Error(e);
+        }
       }
-    } else {
-      try {
-        models = await _localDataSource.fetchManufacturersList(page);
-      } on CacheError catch (e) {
-        return Error(e);
-      }
+
+      final manufacturers = _mapManufacturersModel(models);
+      return Success(manufacturers);
+    } catch (unexpectedError) {
+      return Error(UnexpectedError(unexpectedError.toString()));
     }
-
-    final manufacturers = _mapManufacturersModel(models);
-    return Success(manufacturers);
   }
 
   List<Manufacturer> _mapManufacturersModel(List<ManufacturerModel> models) {
@@ -54,6 +58,7 @@ class ManufacturersRepositoryImpl implements ManufacturersRepository {
         .map((model) => Manufacturer(
               name: model.name,
               country: model.country,
+              id: model.id,
             ))
         .toList();
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jimmy_test/core/localization/string_provider.dart';
 import 'package:jimmy_test/core/theme/theme.dart';
 
 class NoManufacturersMessage extends StatelessWidget {
@@ -11,6 +12,8 @@ class NoManufacturersMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = context.localizedStrings(listen: false);
+
     return Center(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -20,7 +23,7 @@ class NoManufacturersMessage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
             child: Text(
-              'We were unable to find any manufacturers this time',
+              strings.noManufacturersMessage,
               textAlign: TextAlign.center,
               style: AppTheme.typography.semibold,
             ),
@@ -30,7 +33,7 @@ class NoManufacturersMessage extends StatelessWidget {
             color: AppTheme.colors.activeButtonStrongColor,
             onPressed: onRetryPressed,
             child: Text(
-              'Try again',
+              strings.tryAgain,
               style: AppTheme.typography.backgrounded,
             ),
           ),

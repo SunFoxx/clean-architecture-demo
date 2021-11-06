@@ -6,7 +6,7 @@ import 'theme.dart';
 /// set of strict rules that are affecting UI colors and sizes across the app
 /// could be the singleton, but it doesn't need a lazy initialization
 class StyleConvention {
-  static AppColors get appColors => AppTheme.colors;
+  static final AppColors _appColors = AppTheme.colors;
 
   /// font size mapping for local naming convention
   static const Map<FontSize, double> _fontSizes = {
@@ -21,22 +21,22 @@ class StyleConvention {
   };
 
   /// font color mapping for local naming convention
-  static Map<FontColor, Color> get _fontColors => {
-        FontColor.primary: appColors.textRegular,
-        FontColor.backgrounded: appColors.textBackgrounded,
-        FontColor.weak: appColors.textWeak,
-        FontColor.weakBackgrounded: appColors.textWeakBackgrounded,
-        FontColor.accent: appColors.textAccent,
-        FontColor.negative: appColors.textNegative,
-        FontColor.positive: appColors.textPositive,
-        FontColor.active: appColors.textActive,
-      };
+  static final Map<FontColor, Color> _fontColors = {
+    FontColor.primary: _appColors.textRegular,
+    FontColor.backgrounded: _appColors.textBackgrounded,
+    FontColor.weak: _appColors.textWeak,
+    FontColor.weakBackgrounded: _appColors.textWeakBackgrounded,
+    FontColor.accent: _appColors.textAccent,
+    FontColor.negative: _appColors.textNegative,
+    FontColor.positive: _appColors.textPositive,
+    FontColor.active: _appColors.textActive,
+  };
 
   /// extract size from enum value [FontSize] multiplied by [fontScaleFactor]
   static double pickFontSize(FontSize size) => _fontSizes[size] ?? 14.0;
 
   /// extract color from enum value [FontColor]
-  static Color pickFontColor(FontColor color) => _fontColors[color] ?? appColors.textRegular;
+  static Color pickFontColor(FontColor color) => _fontColors[color] ?? _appColors.textRegular;
 }
 
 enum FontSize {

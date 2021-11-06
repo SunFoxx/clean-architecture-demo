@@ -4,12 +4,11 @@ import 'package:jimmy_test/core/errors/errors.dart';
 import 'package:jimmy_test/core/network/network_info.dart';
 import 'package:jimmy_test/features/manufacturers/data/datasources/manufacturers_local_data_source.dart';
 import 'package:jimmy_test/features/manufacturers/data/datasources/manufacturers_remote_data_source.dart';
-import 'package:jimmy_test/features/manufacturers/data/models/manufacturer_model.dart';
 import 'package:jimmy_test/features/manufacturers/data/repositories/manufacturers_repository.dart';
-import 'package:jimmy_test/features/manufacturers/domain/entities/manufacturer.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../../../fixtures/manufacturers/manufacturers_test_models.dart';
 import 'manufacturers_repository_test.mocks.dart';
 
 @GenerateMocks([ManufacturersLocalDataSource, ManufacturersRemoteDataSource, NetworkInfo])
@@ -56,20 +55,13 @@ main() {
 
   group('fetchManufacturers method', () {
     const tPage = 1;
-    final tManufacturersModels = [
-      const ManufacturerModel(name: 'M1', country: 'NL', id: 1),
-      const ManufacturerModel(name: 'M2', country: 'RU', id: 2),
-    ];
-    final tManufacturers = [
-      const Manufacturer(name: 'M1', country: 'NL'),
-      const Manufacturer(name: 'M2', country: 'RU'),
-    ];
+    const tManufacturersModels = ManufacturersTestModels.tManufacturerModelsPage1;
+    const tManufacturers = ManufacturersTestModels.tManufacturerEntitiesPage1;
 
     test('should check if device online', () async {
       // arrange
       when(networkInfo.isConnected).thenAnswer((_) async => true);
-      when(remoteDataSource.fetchManufacturersList(any)).thenAnswer((_) async => []);
-      when(localDataSource.preserveManufacturersList(any, any)).thenAnswer((_) async => true);
+
       // act
       manufacturersRepository.fetchManufacturers(tPage);
       // assert

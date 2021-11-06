@@ -1,38 +1,41 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:jimmy_test/core/entities/result.dart';
 import 'package:jimmy_test/core/errors/errors.dart';
+import 'package:jimmy_test/core/errors/usecases/map_error_to_message.dart';
 import 'package:jimmy_test/features/manufacturers/domain/entities/manufacturer.dart';
 import 'package:jimmy_test/features/manufacturers/domain/usecases/load_manufacturers.dart';
 import 'package:jimmy_test/features/manufacturers/presentation/bloc/manufacturers_bloc.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../../fixtures/manufacturers/manufacturers_test_models.dart';
 import 'manufacturers_bloc_test.mocks.dart';
 
-@GenerateMocks([LoadManufacturers])
+@GenerateMocks([LoadManufacturers, MapErrorToMessage])
 main() {
   late ManufacturersBloc bloc;
   late MockLoadManufacturers mockLoadManufacturers;
+  late MockMapErrorToMessage mapErrorToMessage;
+
+  const tErrorMessage = 'Test error message';
+  const tUnexpectedError = UnexpectedError(tErrorMessage);
+  const tManufacturersPage1 = ManufacturersTestModels.tManufacturerEntitiesPage1;
+  const tManufacturersPage2 = ManufacturersTestModels.tManufacturerEntitiesPage2;
 
   setUp(() {
     mockLoadManufacturers = MockLoadManufacturers();
-    bloc = ManufacturersBloc(loadManufacturers: mockLoadManufacturers);
+    mapErrorToMessage = MockMapErrorToMessage();
+    bloc = ManufacturersBloc(
+      loadManufacturers: mockLoadManufacturers,
+      mapErrorToMessage: mapErrorToMessage,
+    );
+
+    when(mapErrorToMessage(any)).thenAnswer((_) async => tErrorMessage);
   });
 
   tearDown(() {
     bloc.close();
   });
-
-  const tErrorMessage = 'Test error message';
-  const tUnexpectedError = UnexpectedError(tErrorMessage);
-  const tManufacturersPage1 = <Manufacturer>[
-    Manufacturer(name: 'name1', country: 'country1'),
-    Manufacturer(name: 'name2', country: 'country2'),
-  ];
-  const tManufacturersPage2 = <Manufacturer>[
-    Manufacturer(name: 'name3', country: 'country3'),
-    Manufacturer(name: 'name4', country: 'country4'),
-  ];
 
   test('should have proper initial state', () {
     expect(bloc.state, ManufacturersState.initial());
@@ -41,7 +44,7 @@ main() {
   group('load first page', () {
     final tInitialState = ManufacturersState.initial();
 
-    test('should abort loading upon error and change error state', () async {
+    test('should abort loading upon error and change errorState with mapped message', () async {
       // arrange
       when(mockLoadManufacturers(any))
           .thenAnswer((realInvocation) async => Error(tUnexpectedError));
@@ -50,13 +53,14 @@ main() {
       bloc.add(InitManufacturersPage());
 
       // assert
-      expectLater(
+      await expectLater(
           bloc.stream,
           emitsInOrder([
             tInitialState,
             tInitialState.copyWith(isLoading: true),
-            tInitialState.copyWith(errorState: LoadingError(tUnexpectedError.toString())),
+            tInitialState.copyWith(errorState: LoadingError(tErrorMessage)),
           ]));
+      verify(mapErrorToMessage(const ErrorMessageMapperParameters(error: tUnexpectedError)));
     });
 
     test('should emit state with loaded list when loaded', () async {
@@ -95,12 +99,13 @@ main() {
       bloc.add(LoadNextPageEvent());
 
       // assert
-      expectLater(
+      await expectLater(
           bloc.stream,
           emitsInOrder([
             tLoadedPage1State.copyWith(isLoading: true),
-            tLoadedPage1State.copyWith(errorState: LoadingError(tUnexpectedError.toString()))
+            tLoadedPage1State.copyWith(errorState: LoadingError(tErrorMessage))
           ]));
+      verify(mapErrorToMessage(const ErrorMessageMapperParameters(error: tUnexpectedError)));
     });
 
     test('should append loaded page to the existing one when loading is completed successfully',

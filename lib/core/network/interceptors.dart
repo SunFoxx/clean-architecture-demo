@@ -11,6 +11,10 @@ class BadNetworkErrorInterceptor extends Interceptor {
       return handler.reject(BadConnectionError(err.requestOptions));
     }
 
+    if ((err.response?.statusCode ?? 0) > 400) {
+      return handler.reject(ServerError.fromDioError(err));
+    }
+
     return handler.next(err);
   }
 

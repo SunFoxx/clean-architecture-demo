@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jimmy_test/core/localization/string_provider.dart';
 import 'package:jimmy_test/core/theme/theme.dart';
 
 class EmptyListErrorMessage extends StatelessWidget {
@@ -13,6 +14,8 @@ class EmptyListErrorMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strings = context.localizedStrings(listen: false);
+
     return Center(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -32,7 +35,7 @@ class EmptyListErrorMessage extends StatelessWidget {
             color: AppTheme.colors.activeButtonStrongColor,
             onPressed: onRetryPressed,
             child: Text(
-              'Try again',
+              strings.tryAgain,
               style: AppTheme.typography.backgrounded,
             ),
           ),

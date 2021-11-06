@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:jimmy_test/core/entities/result.dart';
 import 'package:jimmy_test/core/entities/usecase.dart';
 import 'package:jimmy_test/features/manufacturers/domain/entities/manufacturer.dart';
@@ -18,8 +19,11 @@ class LoadManufacturers
   }
 }
 
-class LoadManufacturersParams {
+class LoadManufacturersParams extends Equatable {
   final int page;
 
-  LoadManufacturersParams(this.page) : assert(page > 0);
+  const LoadManufacturersParams(this.page) : assert(page > 0);
+
+  @override
+  List<Object?> get props => [page];
 }

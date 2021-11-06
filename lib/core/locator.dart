@@ -1,5 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:jimmy_test/core/errors/usecases/map_error_to_message.dart';
+import 'package:jimmy_test/core/localization/en/en_strings.dart';
 import 'package:jimmy_test/core/network/network_client.dart';
 import 'package:jimmy_test/core/network/network_info.dart';
 import 'package:jimmy_test/features/manufacturers/data/datasources/manufacturers_local_data_source.dart';
@@ -8,6 +10,8 @@ import 'package:jimmy_test/features/manufacturers/data/repositories/manufacturer
 import 'package:jimmy_test/features/manufacturers/domain/repositories/manufacturers_repository.dart';
 import 'package:jimmy_test/features/manufacturers/domain/usecases/load_manufacturers.dart';
 import 'package:jimmy_test/features/manufacturers/presentation/bloc/manufacturers_bloc.dart';
+
+import 'localization/string_provider.dart';
 
 /// Dependency injection container reference
 final locator = GetIt.instance;
@@ -23,6 +27,9 @@ void _initCore() {
   locator.registerLazySingleton<VehiclesApiClient>(
       () => VehiclesApiClient()..configureVehiclesApiClient());
   locator.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(InternetConnectionChecker()));
+  locator.registerLazySingleton(() => StringProvider(EnStrings()));
+
+  locator.registerLazySingleton(() => MapErrorToMessage(locator.get()));
 }
 
 void _initManufacturers() {
@@ -37,5 +44,8 @@ void _initManufacturers() {
       ));
   locator
       .registerLazySingleton<LoadManufacturers>(() => LoadManufacturers(repository: locator.get()));
-  locator.registerFactory(() => ManufacturersBloc(loadManufacturers: locator.get()));
+  locator.registerFactory(() => ManufacturersBloc(
+        loadManufacturers: locator.get(),
+        mapErrorToMessage: locator.get(),
+      ));
 }
