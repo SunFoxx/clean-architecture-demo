@@ -2,6 +2,11 @@
 This app serves as a testing assignment for Senior Flutter Developer position. It reaches out for [public api](https://vpic.nhtsa.dot.gov/api/) to fetch the information about all known vehicles manufacturers if a form of infinite list and allows to request details about all makes of every individual manufacturer.
 
 ## Installation
+
+#### Prerequisites
+– Dart 2.12.0 ([Get from here](https://dart.dev/get-dart)) <br />
+– Flutter 2.5.1 ([Get from here](https://flutter.dev/docs/get-started/install]))
+
 1. install all the dependencies via:<br />
 ``flutter pub get``
 2. generate missing code snippets <br />
