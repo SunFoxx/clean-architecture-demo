@@ -7,8 +7,8 @@ import '../../../../fixtures/fixture_reader.dart';
 import '../../../../fixtures/makes/makes_test_models.dart';
 
 main() {
-  final tMakeModels = MakesTestModels.tMakeModels987;
-  final tMakesResponseModel = MakesTestModels.tMakeResponseModel987;
+  const tMakeModels = MakesTestModels.tMakeModels987;
+  const tMakesResponseModel = MakesTestModels.tMakeResponseModel987;
 
   group('fromJson', () {
     test('should return valid model with list of sub-models when a valid JSON given', () async {

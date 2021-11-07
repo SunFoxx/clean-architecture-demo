@@ -23,6 +23,8 @@ This app is designed with clean architecture. Generally it is separated into two
     * [manufacturers](lib/features/manufacturers) - operates with manufacturers, defines how we load, process and display them.
     * [makes](lib/features/makes) - basically the same thing, but operates with makes
     
+[Unit-tests](test) are mimicking the whole structure of the app
+    
 Every feature is presented with 3 loosely coupled layers: __data__, __domain__ and __presentation__. They define the direction of data flow and serve different purposes
 * __data__ layer includes logic of communication with the 'outer world' - databases, API's, cache, file system etc.
 * __domain__ layer holds the pure business logic. Usually consists of abstractions and classes that operate those abstractions regardless of their implementations

@@ -19,7 +19,7 @@ main() {
   });
 
   const tManufacturerId = MakesTestModels.tManufacturerId;
-  final tMakes = MakesTestModels.tMakeEntities987;
+  const tMakes = MakesTestModels.tMakeEntities987;
   final tMakesResponse = Future.value(Success(tMakes));
 
   test('should forward result from repository when requested with manufacturer id', () async {
