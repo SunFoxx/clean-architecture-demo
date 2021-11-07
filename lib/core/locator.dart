@@ -2,6 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:jimmy_test/core/errors/usecases/map_error_to_message.dart';
 import 'package:jimmy_test/core/localization/en/en_strings.dart';
+import 'package:jimmy_test/core/logger/logger_factory.dart';
 import 'package:jimmy_test/core/network/network_client.dart';
 import 'package:jimmy_test/core/network/network_info.dart';
 import 'package:jimmy_test/features/makes/data/datasources/makes_local_data_source.dart';
@@ -16,6 +17,7 @@ import 'package:jimmy_test/features/manufacturers/data/repositories/manufacturer
 import 'package:jimmy_test/features/manufacturers/domain/repositories/manufacturers_repository.dart';
 import 'package:jimmy_test/features/manufacturers/domain/usecases/load_manufacturers.dart';
 import 'package:jimmy_test/features/manufacturers/presentation/bloc/manufacturers_bloc.dart';
+import 'package:logger/logger.dart';
 
 import 'localization/string_provider.dart';
 
@@ -31,6 +33,7 @@ Future initLocator() async {
 }
 
 void _initCore() {
+  locator.registerLazySingleton<Logger>(() => LoggerFactory.getLogger());
   locator.registerLazySingleton<VehiclesApiClient>(
       () => VehiclesApiClient()..configureVehiclesApiClient());
   locator.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(InternetConnectionChecker()));

@@ -25,10 +25,13 @@ dependencies:
   # Local storage persistence
   hive: ^2.0.4
   hive_flutter: ^1.1.0
-  # needed to listen for changes from ChangeNotifiers (specifically for this app's Theme)
+  # Needed to listen for changes from ChangeNotifiers (specifically for this app's Theme and localization)
   provider: ^6.0.1
-  # font family library
+  # Font family library
   google_fonts: ^2.1.0
+  # Logging
+  logger: ^1.1.0
+  pretty_dio_logger: ^1.1.1
 
 dev_dependencies:
   flutter_test:
