@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:jimmy_test/core/localization/string_provider.dart';
 import 'package:jimmy_test/core/widgets/interactive_message.dart';
 
-/// Used to display error when active manufacturers list is empty
-class EmptyListErrorMessage extends StatelessWidget {
+/// Used to display error when makes list has failed to load
+class MakesErrorMessage extends StatelessWidget {
   final String errorMessage;
   final VoidCallback onRetryPressed;
 
-  const EmptyListErrorMessage({
+  const MakesErrorMessage({
     Key? key,
-    required this.errorMessage,
     required this.onRetryPressed,
+    required this.errorMessage,
   }) : super(key: key);
 
   @override

@@ -40,7 +40,7 @@ class AppTextStyles {
 
   TextStyle get big => AppTheme.baseFont.copyWith(
         fontWeight: FontWeight.normal,
-        color: StyleConvention.pickFontColor(FontColor.weak),
+        color: StyleConvention.pickFontColor(FontColor.primary),
         fontSize: StyleConvention.pickFontSize(FontSize.base),
       );
 
@@ -50,6 +50,11 @@ class AppTextStyles {
         color: StyleConvention.pickFontColor(FontColor.primary),
         fontSize: StyleConvention.pickFontSize(FontSize.base),
         decoration: TextDecoration.none,
+      );
+
+  TextStyle get mediumIncreasedActive => medium.copyWith(
+        color: StyleConvention.pickFontColor(FontColor.active),
+        fontSize: StyleConvention.pickFontSize(FontSize.increased),
       );
 
   TextStyle get mediumLargeDecorative => AppTheme.decorationFont.copyWith(

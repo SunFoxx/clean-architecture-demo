@@ -9,7 +9,11 @@ abstract class ManufacturerStrings {
   String get noManufacturersMessage;
 }
 
-abstract class MakesStrings {}
+abstract class MakesStrings {
+  String get backToManufacturersButtonText;
+
+  String get noMakesMessage;
+}
 
 abstract class ErrorStrings {
   String get cacheErrorMessage;

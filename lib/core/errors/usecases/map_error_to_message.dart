@@ -15,25 +15,25 @@ class MapErrorToMessage implements UseCase<String, ErrorMessageMapperParameters>
   Future<String> call(ErrorMessageMapperParameters params) {
     final strings = _stringProvider.strings;
     final exception = params.error;
-    String message;
 
-    switch (exception.runtimeType) {
-      case ServerError:
-        message = params.serverErrorMessage ??
+    getMessageByType() {
+      if (exception is ServerError) {
+        return params.serverErrorMessage ??
             '${strings.serverErrorMessagePart} ${exception.toString()}';
-        break;
-      case BadConnectionError:
-        message = params.badConnectivityErrorMessage ?? strings.badConnectivityErrorMessage;
-        break;
-      case CacheError:
-        message = params.cacheErrorMessage ?? strings.cacheErrorMessage;
-        break;
-      case UnexpectedError:
-      default:
-        message = params.unexpectedErrorMessage ?? strings.unexpectedErrorMessage;
+      }
+
+      if (exception is BadConnectionError) {
+        return params.badConnectivityErrorMessage ?? strings.badConnectivityErrorMessage;
+      }
+
+      if (exception is CacheError) {
+        return params.cacheErrorMessage ?? strings.cacheErrorMessage;
+      }
+
+      return params.unexpectedErrorMessage ?? strings.unexpectedErrorMessage;
     }
 
-    return Future.value(message);
+    return Future.value(getMessageByType());
   }
 }
 
