@@ -42,14 +42,7 @@ main() {
   /// passed parameter is a function that generates the parameters for every error usecase call
   Future<Map<Exception, String>> getMessagesForAllErrors(
       ErrorMessageMapperParameters Function(Exception error) getParams) async {
-    Map<Exception, String> result = {};
-
-    for (var error in tAllErrors) {
-      final message = await mapErrorToMessage(getParams(error));
-      result[error] = message;
-    }
-
-    return result;
+    return {for (var error in tAllErrors) error: await mapErrorToMessage(getParams(error))};
   }
 
   test('should return default message from localizedStrings when no param message provided',
