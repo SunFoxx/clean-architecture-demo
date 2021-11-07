@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:jimmy_test/core/network/interceptors.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
+/// Wrapper around Dio client for streamlining its configuration
 class VehiclesApiClient {
   static const _BASE_URL = 'https://vpic.nhtsa.dot.gov/api';
 

@@ -1,5 +1,6 @@
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
+/// This class serves the purpose of checking current connectivity status
 abstract class NetworkInfo {
   Future<bool> get isConnected;
 }

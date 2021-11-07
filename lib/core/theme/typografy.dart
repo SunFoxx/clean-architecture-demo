@@ -18,11 +18,6 @@ class AppTextStyles {
         decoration: TextDecoration.none,
       );
 
-  TextStyle get small => normal.copyWith(
-        fontSize: StyleConvention.pickFontSize(FontSize.small),
-        height: 1.5,
-      );
-
   TextStyle get weakSmall => AppTheme.baseFont.copyWith(
         fontWeight: FontWeight.normal,
         color: StyleConvention.pickFontColor(FontColor.weak),
@@ -36,12 +31,6 @@ class AppTextStyles {
         color: StyleConvention.pickFontColor(FontColor.backgrounded),
         fontSize: StyleConvention.pickFontSize(FontSize.base),
         decoration: TextDecoration.none,
-      );
-
-  TextStyle get big => AppTheme.baseFont.copyWith(
-        fontWeight: FontWeight.normal,
-        color: StyleConvention.pickFontColor(FontColor.primary),
-        fontSize: StyleConvention.pickFontSize(FontSize.base),
       );
 
   // ~*~ medium weight variations ~*~
@@ -72,11 +61,4 @@ class AppTextStyles {
 
   TextStyle get semiboldNegative =>
       semibold.copyWith(color: StyleConvention.pickFontColor(FontColor.negative));
-
-  // ~*~ bold weight variations ~*~
-  TextStyle get bold => AppTheme.baseFont.copyWith(
-        fontSize: StyleConvention.pickFontSize(FontSize.base),
-        fontWeight: FontWeight.normal,
-        color: StyleConvention.pickFontColor(FontColor.primary),
-      );
 }

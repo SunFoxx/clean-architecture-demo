@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jimmy_test/core/logger/logger.dart';
 
+/// Observer for dumping bloc events into logs
 class LoggingBlocObserver extends BlocObserver {
   @override
   void onError(BlocBase bloc, Object error, StackTrace stackTrace) {

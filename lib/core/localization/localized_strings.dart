@@ -1,3 +1,6 @@
+/// Carcass for holding every string in the app
+/// Whereas the app becomes bigger and bigger, the monolith of String getters semantically divided into
+/// multiple subclasses for better readability
 abstract class LocalizedStrings
     implements CommonStrings, MakesStrings, ManufacturerStrings, ErrorStrings {}
 

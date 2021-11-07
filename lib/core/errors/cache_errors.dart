@@ -9,7 +9,7 @@ class CacheStorageUnavailable extends CacheError {
 
   @override
   String toString() {
-    return 'Cache storage can\'t be accessed. It might not have been initialized properly';
+    return 'Storage "$storageName" currently unavailable and can\'t be accessed';
   }
 }
 
@@ -21,7 +21,7 @@ class CacheDataCorrupted extends CacheError {
 
   @override
   String toString() {
-    return 'The accessed data from the local storage might be broken or wrongly formatted';
+    return 'The accessed data with key "$corruptedKey" from the local storage "$storageName" might be broken or wrongly formatted';
   }
 }
 
@@ -33,6 +33,6 @@ class CacheDataNotFound extends CacheError {
 
   @override
   String toString() {
-    return 'You\'ve tried to access storage value that does not exists';
+    return 'You\'ve tried to access value with key "$missingKey" from storage "$storageName", but it does not exists';
   }
 }

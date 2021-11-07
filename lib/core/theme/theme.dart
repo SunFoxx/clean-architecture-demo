@@ -8,7 +8,7 @@ import 'typografy.dart';
 
 /// Access point for all styling parameters
 /// Connects together all theme parts - text styles, sizes and colors
-/// Doesn't need a [BuildContext] to work, but needs to be listened in the root widget
+/// Doesn't need a [BuildContext] to work, but must be listened to to reflect changes of the theme in the UI
 /// Basically, a singleton object. For easier access of instance, it uses static methods
 class AppTheme extends ChangeNotifier {
   static final AppTheme _instance = AppTheme._();
