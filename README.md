@@ -35,6 +35,9 @@ Every feature is presented with 3 loosely coupled layers: __data__, __domain__ a
 * __domain__ layer holds the pure business logic. Usually consists of abstractions and classes that operate those abstractions regardless of their implementations
 * __presentation__ layer responsible, well, for presenting the app to the end user - rendering the UI, handling interactions with elements and navigation between screens
 
-The data flows between these layers like this: __Data -> Domain <- Presentation__.
+The data flows between these layers like this:
+
+![img](assets/excluded/architecture-proposal.png)
+
 Domain doesn’t have any dependency on any other layer and mostly written with pure Dart with almost no external dependencies and frameworks.
 However, data and presentation layers are well-aware of domain layer, whereas they still have no idea about each other.
