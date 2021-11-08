@@ -1,5 +1,6 @@
 import 'package:jimmy_test/core/entities/result.dart';
 import 'package:jimmy_test/core/errors/errors.dart';
+import 'package:jimmy_test/core/logger/logger.dart';
 import 'package:jimmy_test/core/network/network_info.dart';
 import 'package:jimmy_test/features/manufacturers/data/datasources/manufacturers_local_data_source.dart';
 import 'package:jimmy_test/features/manufacturers/data/datasources/manufacturers_remote_data_source.dart';
@@ -49,6 +50,7 @@ class ManufacturersRepositoryImpl implements ManufacturersRepository {
       final manufacturers = _mapManufacturersModel(models);
       return Success(manufacturers);
     } catch (unexpectedError) {
+      log.e(unexpectedError.toString(), unexpectedError);
       return Error(UnexpectedError(unexpectedError.toString()));
     }
   }

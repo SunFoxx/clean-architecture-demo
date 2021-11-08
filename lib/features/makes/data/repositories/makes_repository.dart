@@ -1,5 +1,6 @@
 import 'package:jimmy_test/core/entities/result.dart';
 import 'package:jimmy_test/core/errors/errors.dart';
+import 'package:jimmy_test/core/logger/logger.dart';
 import 'package:jimmy_test/core/network/network_info.dart';
 import 'package:jimmy_test/features/makes/data/datasources/makes_local_data_source.dart';
 import 'package:jimmy_test/features/makes/data/datasources/makes_remote_datasource.dart';
@@ -49,6 +50,7 @@ class MakesRepositoryImpl implements MakesRepository {
       final makes = _mapMakeModels(models);
       return Success(makes);
     } catch (unexpectedError) {
+      log.e(unexpectedError.toString(), unexpectedError);
       return Error(UnexpectedError(unexpectedError.toString()));
     }
   }
